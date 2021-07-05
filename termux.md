@@ -8,5 +8,23 @@
 
 下面使用 Termux 的部分，会持续更新。
 
-1. ```Termux-setup-storage``` 可以帮助 Termux 获得整个用户存储的访问权限。
-2. ```vim ~/.termux.termux.properties``` 可以配置 Termux 的外观和行为。比如我配置了一下工具栏 ```extra-keys = [['ESC','TAB','CTRL','ALT','-','LEFT','RIGHT','UP','DOWN']]```
+1. ```Termux-setup-storage``` 可以帮助 Termux 获得整个用户存储的访问权限。参考 [Termux-setup-storage](https://wiki.termux.com/wiki/Termux-setup-storage)。
+2. ```vim ~/.termux.termux.properties``` 可以配置 Termux 的外观和行为。比如我配置了一下工具栏 ```extra-keys = [['ESC','TAB','CTRL','ALT','-','LEFT','RIGHT','UP','DOWN']]```。参考 [Terminal Settings](https://wiki.termux.com/wiki/Terminal_Settings)。
+3. 用 ```ln -s ~/storage/shared/XXX``` 把手机目录中的 XXX 链接到用户目录，方便快捷访问。最重要的是把 ```/``` 给链接到 ```~```，即 ```ln -s /data/data/com.termux/files/ ~/root```，否则总会显示无法访问 ```cd /```。
+4. 使用 ```pkg se``` 搜索，```pkg in``` 安装，```pkg rm``` 卸载，```pkg up``` 更新等等。参考 [Package Management](https://wiki.termux.com/wiki/Package_Management) 获得更多信息。
+5. 如前文所述，Termux 最大的优势在于可以方便地备份和恢复。备份只需要
+ 
+  ```
+  cd /data/data/com.termux/files
+  tar -zcf /sdcard/termux-backup.tar.gz home usr
+  ```
+  
+  恢复只需要
+  ```
+  termux-setup-storage
+  cd /data/data/com.termux/files
+  tar -zxf /sdcard/termux-backup.tar.gz --recursive-unlink --preserve-permissions
+  ```
+  
+  就可以实现一次配置，永久使用，随时玩坏了也没负担。参考 [Backing up Termux](https://wiki.termux.com/wiki/Backing_up_Termux)。
+6. 
